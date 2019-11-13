@@ -1,4 +1,5 @@
 <?php
+//enter your username passwd here in place of dipanshu, dipanshu23 respectively.
     $conn = mysqli_connect('localhost','dipanshu','dipanshu23','project');
     $from_date = $_POST['from_date'];
     $in_date = new DateTime($from_date . " 01:00:00");
