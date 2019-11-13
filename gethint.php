@@ -1,12 +1,12 @@
 <?php
     $conn = mysqli_connect('localhost','dipanshu','dipanshu23','project');
-    $from_date = $_POST['from_date'];
+    $from_date = $_REQUEST['from_date'];
     $in_date = new DateTime($from_date . " 01:00:00");
 
-    $to_date = $_POST['to_date'];
+    $to_date = $_REQUEST['to_date'];
     $fin_date = new DateTime($to_date . " 23:00:01");
 
-    $field = $_POST['field'];
+    $field = $_REQUEST['field'];
     $query = "SELECT * FROM pollution_data";
     $result = $conn->query($query);
     $maximum = 0.00;
@@ -33,17 +33,16 @@
         
     }
     $avg/=$count;
+    $q = $_REQUEST["q"];
     $hint = "";
-    if($_POST['avg'])$hint.= "average value $avg <br>";
-    if($_POST['max']){
+    if(strpos($q,"avg")!==false)$hint.= "average value $avg <br>";
+    if(strpos($q,"max")!==false){
         if($maximum != 0)$hint.= "maximum value: $maximum <br>";
         else $hint.= "no value to maximise <br>";
     }
-    if($_POST['min']){
-        if($minimum!=10000)    $hint.= "minimum value: $minimum <br>";
+    if(strpos($q, "min")){
+        if($minimum!=10000)$hint.= "minimum value: $minimum <br>";
         else $hint.= "no value to minimise <br>";
     }
-
     echo $hint;
-
 ?>
